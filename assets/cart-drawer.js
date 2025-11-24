@@ -203,9 +203,7 @@ class ComprehensiveCartRecommendations extends HTMLElement {
           const response = await fetch(url);
           const text = await response.text();
           const html = document.createElement('div');
-          html.innerHTML = text;
-          console.log(html, "html===>");
-          
+          html.innerHTML = text;          
           const productCards = html.querySelectorAll('.cart-drawer__recommendations .grid__item');
           return Array.from(productCards).map(card => this.extractProductData(card));
       } catch (error) {
@@ -274,10 +272,20 @@ class ComprehensiveCartRecommendations extends HTMLElement {
 
   renderRecommendations(recommendations) {     
     const productsToShow = parseInt(this.dataset.productsToShow, 10) || recommendations.length; const limitedRecommendations = recommendations.slice(0, productsToShow); 
-    const container = document.createElement('div'); 
-    container.className = 'product-recommendations no-markers'; 
-    limitedRecommendations.forEach((item) => { if (item && item.element) { container.appendChild(item.element); } }); 
-    this.innerHTML = ''; this.appendChild(container); 
+    const wrapper = document.createElement('div');
+    wrapper.className = 'swiper cart-reco-swiper';
+    
+    const swiperWrapper = document.createElement('div');
+    swiperWrapper.className = 'swiper-wrapper';
+
+    const swiperPagination = document.createElement('div');
+    swiperPagination.className = 'swiper-pagination';
+    
+    limitedRecommendations.forEach((item) => { if (item && item.element) { swiperWrapper.appendChild(item.element); } }); 
+    wrapper.appendChild(swiperWrapper); 
+    wrapper.appendChild(swiperPagination); 
+    
+    this.innerHTML = ''; this.appendChild(wrapper); 
     const recommendationsContainer = this.closest('.cart-drawer__recommendations'); 
     if (recommendationsContainer) { 
       if (limitedRecommendations.length > 0) { 
@@ -290,7 +298,30 @@ class ComprehensiveCartRecommendations extends HTMLElement {
        this.classList.add('product-recommendations--loaded'); 
     } else {
       this.classList.remove('product-recommendations--loaded'); 
-    } setTimeout(() => { this.dispatchEvent(new CustomEvent('cart-recommendations-rendered', { bubbles: true })); }, 0); 
+    } setTimeout(() => { 
+      this.initSwiper();
+      this.dispatchEvent(new CustomEvent('cart-recommendations-rendered', { bubbles: true })); 
+    }, 0); 
+  }
+
+  initSwiper() {
+    if (!window.Swiper) {
+      console.warn("Swiper not loaded.");
+      return;
+    }
+
+    new Swiper('.cart-reco-swiper', {
+      slidesPerView: 1.1,
+      spaceBetween: 10,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    });
   }
 }
 

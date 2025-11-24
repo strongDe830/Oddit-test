@@ -1,9 +1,4 @@
-{% comment %}
-  Generates and renders cart drawer recommendations
-{% endcomment %}
-
 <div class="cart-drawer__recommendations">
-
   {% assign products_to_recommend = settings.limit_product %}
   {% assign products_to_show = settings.limit_product %}
   {% assign section_id = "cart-drawer" %}
@@ -36,6 +31,7 @@
                     </div>
                 {% endfor %}
             </div>
+            <div class="swiper-pagination"></div>
         </div>
       {% endif %}
   </comprehensive-cart-recommendations>
@@ -51,6 +47,7 @@
 
   .cart-drawer__recommendations.has-recommendations {
     display: block; 
+    max-height: 300px;
   }
 
   .cart-drawer__recommendations .complementary-products .grid__item {
@@ -66,6 +63,8 @@
     margin-bottom: 20px;
     margin-top: 0;
     text-align: center;
+    font-family: "Roboto";
+    text-transform: uppercase;
   }
 
   .product-recommendations.no-markers {
@@ -104,6 +103,7 @@
     align-items: center;
     justify-content: space-between;
   }
+
   .cart-upsell-item__media img {
     width: 100%;
     height: 100%;
@@ -137,7 +137,7 @@
   }
 
   .cart-upsell-item__button .product-form__submit {
-    width: 100%;
+    width: max-content;
     font-size: 14px;
     padding: 10px 14px;
     border: none;
@@ -150,9 +150,9 @@
   }
     
   .cart-upsell-item__button .button:after {
-        box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset))
-        rgba(var(--color-button-text), var(--border-opacity)),
-      0 0 0 var(--buttons-border-width) {{ settings.cart_drawer_recommendation_btn_color }};
+    box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset))
+    rgba(var(--color-button-text), var(--border-opacity)),
+  0 0 0 var(--buttons-border-width) {{ settings.cart_drawer_recommendation_btn_color }};
   }
 
   .cart-upsell-item__button .button:not([disabled]):hover::after {
@@ -160,9 +160,25 @@
         rgba(var(--color-button-text), var(--border-opacity)),
       0 0 0 calc(var(--buttons-border-width) + 1px) {{ settings.cart_drawer_recommendation_btn_color }};
   }
+
   .cart-upsell-swiper .swiper-slide {
     width: auto;
-    }
+  }
+
+  .complementary-products .swiper-pagination {
+    position: relative;
+    bottom: 0;
+  }
+  
+  .complementary-products .swiper-pagination-bullet {
+    border: 1px solid #000;
+    opacity: 1;
+    background: #fff;
+  }
+
+  .complementary-products .swiper-pagination-bullet-active {
+    background: #000;
+  }
 </style>
 
 
