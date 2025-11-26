@@ -40,7 +40,7 @@
   .cart-drawer__recommendations {
     margin-top: 20px;
     border-top: 1px solid #D9DAD9;
-    padding: 10px;
+    padding: 20px 16px;
     display: none;
   }
 
@@ -59,11 +59,11 @@
   .cart-drawer__recommendations-heading {
     font-size: 1.6rem;
     font-weight: 600;
-    margin-bottom: 20px;
-    margin-top: 0;
+    margin-bottom: 10px;
     text-align: center;
-    font-family: "Roboto";
+    font-family: var(--font-heading-family);
     text-transform: uppercase;
+    line-height: 130%;
   }
 
   .product-recommendations.no-markers {
@@ -88,7 +88,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 12px 10px;
+    padding: 10px 12px;
     border-color: rgba(var(--color-foreground), 0.75);
     background: var(--gradient-background);
   }
@@ -116,7 +116,7 @@
   }
 
   .cart-upsell-item__title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     margin: 0 0 10px;
     line-height: 1.2;
@@ -125,14 +125,16 @@
   .cart-upsell-item__link {
     color: inherit;
     text-decoration: none;
+    text-transform: uppercase;
   }
 
   .cart-upsell-item__link:hover {
     text-decoration: underline;
   }
 
-  .cart-upsell-item__price {
+  .cart-upsell-item__price span {
     font-size: 14px;
+    font-weight: 700;
   }
 
   .cart-upsell-item__button .product-form__submit {
@@ -146,6 +148,7 @@
     margin: 0;
     min-width: unset;
     min-height: unset;
+    font-weight: 700;
   }
     
   .cart-upsell-item__button .button:after {

@@ -49,12 +49,9 @@
         </h3>
         <div class="cart-upsell-item__info-body">
             <div id="price-{{ section_id }}-{{ product.id }}" role="status" class="cart-upsell-item__price" data-price-wrapper>
-            {%- render 'price',
-                product: product,
-                use_variant: true,
-                show_badges: false,
-                disable_cart_upsell_currency_code: true
-            -%}
+              <span class="price-item price-item--regular">
+                {{ product.price | money }}
+              </span>
             </div>
             <div class="cart-upsell-item__button" data-product-form>
             <product-form

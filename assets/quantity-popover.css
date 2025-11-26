@@ -151,7 +151,9 @@ quantity-popover .quantity__rules span:first-of-type {
 }
 
 quantity-popover .quantity {
-  background: rgb(var(--color-background));
+  background: #D9DAD9;
+  width: calc(10rem / var(--font-body-scale) + var(--inputs-border-width) * 2);
+  min-height: calc((var(--inputs-border-width) * 2) + 3.2rem);
 }
 
 quantity-popover .quantity__rules {
@@ -165,4 +167,14 @@ quantity-popover .quantity__rules .divider:nth-child(2)::before {
 quantity-popover .quantity__button:not(:focus-visible):not(.focused),
 quantity-popover .quantity__input:not(:focus-visible):not(.focused) {
   background-color: initial;
+}
+
+quantity-popover .quantity:after {
+  box-shadow: unset;
+}
+quantity-popover .quantity__input {
+  font-size: 1.4rem;
+}
+quantity-popover .quantity__button {
+  width: calc(3.4rem / var(--font-body-scale));
 }
